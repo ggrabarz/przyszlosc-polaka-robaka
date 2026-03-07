@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Dwa Bieguny — AI, Roboty i Przyszłość Polaka</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#D4952A;--gold-light:#F2C94C;--dark:#1f1b16;--warm-dark:#2d2a26;--cream:#FDFAF5;--paper:#F5F0E8;--text:#2f2b26;--body:#374151;--muted:#5c564e;--caption:#6b6560;--accent-a:#3b6fc0;--accent-b:#2e7d5b;--red:#c0392b}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--body);background:var(--cream);line-height:1.75;overflow-x:hidden;font-size:17px;overflow-wrap:break-word;word-break:break-word}
+#progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));z-index:9999;transition:width .15s}
+img{max-width:100%;display:block}
+.topnav{position:fixed;top:3px;left:0;right:0;z-index:999;padding:.65rem 2rem;display:flex;align-items:center;gap:1.5rem;font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(31,27,22,.92);backdrop-filter:blur(14px);color:#fff}
+.topnav .brand{color:var(--gold-light);font-family:'Lora',serif;font-size:1.05rem;font-weight:700;letter-spacing:.02em;text-transform:none;margin-right:auto}
+.topnav a{color:#bbb5aa;text-decoration:none;transition:color .2s}
+.topnav a:hover{color:var(--gold-light)}
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;background:var(--dark)}
+.hero-img{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;opacity:.4;filter:brightness(.65) saturate(.8)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(31,27,22,.95) 0%,rgba(31,27,22,.3) 50%,rgba(31,27,22,.1) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:3rem 2rem 5rem;max-width:860px}
+.hero-kicker{color:var(--gold-light);font-size:.82rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.2rem}
+.hero h1{font-family:'Lora',serif;color:#fff;font-size:clamp(2rem,5.5vw,3.8rem);line-height:1.18;font-weight:700;margin-bottom:1.3rem}
+.hero h1 em{font-style:italic;color:var(--gold-light)}
+.hero-sub{color:#c4bdb3;font-size:1.05rem;max-width:640px;margin:0 auto 2.5rem;line-height:1.7}
+.scroll-cue{display:inline-block;color:var(--gold-light);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.section{padding:4.5rem 2rem;max-width:780px;margin:0 auto}
+h2{font-family:'Lora',serif;font-size:clamp(1.7rem,3.8vw,2.5rem);font-weight:700;line-height:1.25;margin-bottom:1.4rem;color:var(--text)}
+h3{font-family:'Lora',serif;font-size:1.25rem;font-weight:600;margin:2.2rem 0 .7rem;color:var(--text)}
+p{margin-bottom:1.15rem;color:var(--body)}
+.lead{font-size:1.1rem;color:var(--muted);line-height:1.85}
+.full-img{width:100%;height:52vh;min-height:320px;object-fit:cover;filter:saturate(.85)}
+.img-caption{text-align:center;font-size:.82rem;color:var(--caption);padding:.7rem 2rem 0;font-style:italic}
+.offset-img-wrap{padding:2rem 2rem;max-width:900px;margin:0 auto;display:flex;gap:2rem;align-items:center}
+.offset-img{width:55%;border-radius:4px;box-shadow:6px 8px 30px rgba(0,0,0,.12);filter:saturate(.85)}
+.offset-text{flex:1;font-size:.95rem}
+.offset-text h3{margin-top:0}
+.pullquote{position:relative;border:none;padding:2rem 0 2rem 2.5rem;margin:2.5rem 0;font-family:'Lora',serif;font-size:1.35rem;font-style:italic;line-height:1.55;color:var(--text)}
+.pullquote::before{content:'\201E';position:absolute;left:-.2rem;top:-.3rem;font-size:5rem;color:var(--gold-light);opacity:.4;font-family:'Lora',serif;line-height:1}
+.pullquote cite{display:block;font-family:'Inter',sans-serif;font-size:.82rem;font-style:normal;color:var(--caption);margin-top:.8rem;font-weight:500}
+.dark-band{background:var(--dark);color:#d4cfc8;padding:5rem 2rem}
+.dark-band h2,.dark-band h3{color:#f0ece6}
+.dark-band p{color:#b8b2a8}
+.dark-band .pullquote{color:#d4cfc8}
+.dark-band .pullquote::before{color:var(--gold);opacity:.3}
+.dark-band .lead{color:#9e978e}
+.dark-band a{color:var(--gold-light)}
+.earthy-band{background:var(--paper);padding:4rem 2rem}
+.scenario-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.35rem 1rem;border-radius:3px;margin-bottom:1rem}
+.tag-a{background:var(--accent-a);color:#fff}
+.tag-b{background:var(--accent-b);color:#fff}
+.tag-musk{background:var(--red);color:#fff}
+.tag-dark{background:#44403c;color:#e8e2da}
+.tag-future{background:#6d28d9;color:#fff}
+.tag-action{background:var(--gold);color:#fff}
+.margin-note{background:var(--paper);border-left:3px solid var(--gold);padding:1rem 1.2rem;margin:1.5rem 0;border-radius:0 6px 6px 0;font-size:.9rem;color:var(--muted);transform:rotate(-.3deg);box-shadow:2px 3px 12px rgba(0,0,0,.04)}
+.margin-note strong{color:var(--text)}
+.dark-band .margin-note{background:rgba(255,255,255,.06);border-color:var(--gold);color:#a8a29e}
+.dark-band .margin-note strong{color:#e8e2da}
+.verdict-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.8rem;margin:3rem 0}
+.verdict-card{background:var(--cream);border-radius:10px;padding:2rem;box-shadow:0 3px 24px rgba(0,0,0,.07);border-top:4px solid var(--gold);transition:transform .25s,box-shadow .25s}
+.verdict-card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.1)}
+.verdict-card h4{font-family:'Lora',serif;font-size:1.15rem;margin-bottom:.5rem;color:var(--text)}
+.verdict-card p{font-size:.92rem;color:var(--body)}
+.verdict-emoji{font-size:2.5rem;margin-bottom:.7rem}
+.verdict-score{font-family:'JetBrains Mono',monospace;font-size:.82rem;color:var(--muted);margin-top:1rem;padding-top:1rem;border-top:1px solid #e0dbd3}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:2rem -1rem;padding:0 1rem}
+.table-scroll .data-table{margin:0;min-width:520px}
+.data-table{width:100%;border-collapse:separate;border-spacing:0;margin:2rem 0;font-size:.9rem;border-radius:8px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.data-table th{text-align:left;padding:.75rem 1rem;background:var(--warm-dark);color:#e8e2da;font-weight:600;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase}
+.data-table td{padding:.7rem 1rem;border-bottom:1px solid #e8e2da;background:#fff}
+.data-table tr:nth-child(even) td{background:#faf7f2}
+.data-table tr:hover td{background:#f0ead8}
+.data-table .highlight{color:var(--gold);font-weight:700}
+.dark-band .data-table td{border-color:#3a3530;background:rgba(255,255,255,.03)}
+.dark-band .data-table tr:nth-child(even) td{background:rgba(255,255,255,.06)}
+.dark-band .data-table tr:hover td{background:rgba(255,255,255,.09)}
+.timeline{position:relative;padding-left:2.5rem;margin:2rem 0}
+.timeline::before{content:'';position:absolute;left:.6rem;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--gold),var(--gold-light))}
+.tl-item{position:relative;margin-bottom:2rem}
+.tl-item::before{content:'';position:absolute;left:-2.15rem;top:.5rem;width:12px;height:12px;border-radius:50%;background:var(--gold);border:3px solid var(--cream)}
+.dark-band .tl-item::before{border-color:var(--dark)}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--gold);font-weight:500}
+.tl-text{margin-top:.25rem;font-size:.93rem}
+.scene{background:var(--paper);padding:2rem;border-radius:8px;margin:2rem 0;font-size:.95rem;border-left:3px solid var(--gold-light);line-height:1.8}
+.scene p{margin-bottom:.7rem}
+.scene p:last-child{margin-bottom:0}
+.dark-band .scene{background:rgba(255,255,255,.04);border-color:var(--gold)}
+.action-box{background:#fff;border:2px solid var(--gold);border-radius:10px;padding:2rem;margin:1.5rem 0}
+.action-box h4{font-family:'Lora',serif;font-size:1.1rem;margin-bottom:.8rem;color:var(--text)}
+.action-box ul{padding-left:1.2rem;margin:0}
+.action-box li{margin-bottom:.6rem;font-size:.93rem}
+.action-box li strong{color:var(--text)}
+.auto-bar-wrap{margin:.6rem 0;display:flex;align-items:center;gap:.7rem;font-size:.85rem}
+.auto-bar{height:8px;border-radius:4px;background:#e0dbd3;flex:1;overflow:hidden;max-width:200px}
+.auto-bar-fill{height:100%;border-radius:4px;transition:width .6s ease}
+.fill-human{background:var(--accent-b)}
+.fill-ai{background:var(--accent-a)}
+.auto-label{min-width:3.5rem;text-align:right;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--muted)}
+.dark-band .auto-bar{background:rgba(255,255,255,.1)}
+.end-mark{text-align:center;margin:3.5rem 0 0;font-size:2rem;color:var(--gold);opacity:.6}
+.footer{background:var(--dark);color:#6b6560;text-align:center;padding:3rem 2rem;font-size:.78rem}
+.footer .brand{color:var(--gold-light);font-family:'Lora',serif;font-size:1.15rem;font-weight:700;margin-bottom:.4rem}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:700px){
+  body{font-size:16px}
+  .topnav{padding:.5rem .8rem;gap:.4rem;font-size:.58rem}
+  .topnav .brand{font-size:.88rem;margin-right:.5rem}
+  .section{padding:3rem 1.2rem}
+  .pullquote{font-size:1.15rem;padding-left:1.8rem}
+  .verdict-grid{grid-template-columns:1fr}
+  .hero-content{padding:2rem 1.2rem 3rem}
+  .offset-img-wrap{flex-direction:column!important;padding:1.5rem 1.2rem}
+  .offset-img{width:100%}
+  .scene{padding:1.2rem}
+  .auto-bar{max-width:120px}
+  .auto-bar-wrap{flex-wrap:wrap}
+  .margin-note{transform:none}
+  .table-scroll{margin:2rem -.5rem;padding:0 .5rem}
+}
+</style>
+</head>
+<body>
+
+<div id="progress" style="width:0%"></div>
+
+<nav class="topnav">
+  <span class="brand">Dwa Bieguny</span>
+  <a href="#dentysta">Igor</a>
+  <a href="#serwisant">Bartek</a>
+  <a href="#musk">Musk</a>
+  <a href="#przyszlosc">2030+</a>
+  <a href="#werdykt">Werdykt</a>
+</nav>
+
+<header class="hero">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1737644467636-6b0053476bb2?w=1600&auto=format&q=80" alt="Sylwetka robota humanoidalnego">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-kicker">Analiza &middot; Marzec 2026</div>
+    <h1>Dwa Bieguny:<br>AI, Roboty i Przyszłość <em>Polskiego Dentysty</em> kontra <em>Serwisanta Sprzętu Medycznego</em></h1>
+    <p class="hero-sub">Igor łata zęby w Bolesławcu, wieczorem gra w LoLa i ogląda horrory z żoną. Bartek łata rezonanse po szpitalach zachodniej Polski, wieczorem odpala StarCrafta po uśpieniu trójki dzieci. Obaj przeczytali, że roboty zabiorą im pracę. Który powinien się naprawdę martwić?</p>
+    <span class="scroll-cue">&#9660; Przewiń dalej</span>
+  </div>
+</header>
+
+<!-- ═══════ INTRO ═══════ -->
+<section class="section reveal">
+  <h2>Dwóch Polaków, dwa światy</h2>
+
+  <div class="scene reveal">
+    <p>🦷 <strong>Poniedziałek, 7:48.</strong></p>
+    <p>Silnik Dacii gaśnie. Przez chwilę samochód jeszcze cicho tyka nagrzanym metalem.</p>
+    <p>Igor siedzi bez ruchu. Nie dlatego, że nie chce iść do pracy. Raczej dlatego, że lubi tę krótką ciszę między domem a gabinetem. Kilkadziesiąt sekund zawieszenia, kiedy dzień jeszcze się nie zaczął i wszystko jest możliwe.</p>
+    <p>Na chodniku w Bolesławcu kobieta prowadzi psa. Ktoś otwiera mały sklep po drugiej stronie ulicy. Powietrze ma ten poranny chłód, który znika chwilę po dziewiątej.</p>
+    <p>Igor bierze łyk kawy z termosu. Już letnia. Wysiada, zamyka auto, otwiera drzwi gabinetu.</p>
+    <p>W środku pachnie znajomo: dezynfekcją, plastikiem i lekko stęchłą klimatyzacją, która przez noc odpoczywała. Dla większości ludzi ten zapach oznacza stres. Dla Igora oznacza pracę.</p>
+    <p>Włącza kompresor. Stawia termos na biurku. Zerka na zdjęcie w cienkiej ramce: Anna w fartuchu pielęgniarki, dwóch synów obok w togach maturalnych. Starszy za chwilę idzie na politechnikę, młodszy na medycynę. Obaj chcą wyjechać z Bolesławca.</p>
+    <p>Igor zostaje.</p>
+    <p>Ma 43 lata, własny gabinet, żonę pielęgniarkę i poczucie, że dobrze wybrał zawód. Pacjenci go polecają sąsiadom, teściowej, znajomym z pracy. Po pracy to inna bajka. Wieczorami gra w LoLa (casual, ale regularnie), ogląda z Anną horrory, im bardziej krwawe i pokręcone, tym lepsze: Terrifier, Bone Tomahawk, Mandy. Opowiada znajomym historyjki, z których może połowa jest prawdziwa. Śmieszek, ale taki, którego potem polecasz po mieście, bo „ten to ma złote ręce i jeszcze do tego normalny gość".</p>
+    <p>Za dwadzieścia minut pierwsza wizyta. Mama dzwoniła dwa razy. Ośmiolatek. Pierwsze zdjęcie RTG w życiu i oczywiście trochę strachu.</p>
+    <p>Igor zna ten scenariusz na pamięć.</p>
+    <p>Dinozaury działają prawie zawsze.</p>
+  </div>
+
+  <div class="scene reveal">
+    <p>🔧 <strong>Poniedziałek, 7:48.</strong></p>
+    <p>Bartek jest już w drodze.</p>
+    <p>A4 w stronę Wrocławia. Droga prawie pusta. Samochody pojawiają się w równych odstępach, jakby ktoś rozstawił je na asfalcie w idealnym rytmie.</p>
+    <p>Radio wyłączone. Bartek lubi jeździć w ciszy.</p>
+    <p>Na siedzeniu pasażera torba z narzędziami: metalowe klucze, mierniki, przewody, kilka zapasowych modułów, laptop. Mobilny warsztat. W jednym z wrocławskich szpitali czeka rezonans magnetyczny, który od dwóch dni zgłasza problem z jedną z cewek. Nie jest to katastrofa. Ale w medycynie nie ma czegoś takiego jak „awaria, którą można zostawić na później".</p>
+    <p>Bartek prowadzi jedną ręką, drugą opiera o drzwi. W głowie już układa scenariusze. Uszkodzona cewka. Błąd w elektronice. Przegrzanie. Zła kalibracja. Każda z tych rzeczy oznacza trochę inną historię.</p>
+    <p>W domu zostały trzy małe dzieci, wszystkie w wieku przedszkolnym i wczesnoszkolnym. Noc była krótka: jedno nie spało, drugie zgubiło but w przedszkolu, trzecie ma jutro sprawdzian. Życie po rozwodzie wygląda tak: samochód, narzędzia, cisza, problem do rozwiązania.</p>
+    <p>Ma 40 lat, jednoosobową działalność gospodarczą i wolność, której nie oddałby za żaden etat. Żadnej umowy o pracę, żadnego L4, żadnego płatnego urlopu. Za to niezły obrót i możliwość powiedzenia „nie" każdemu zleceniodawcy. W kontekstach towarzyskich trzyma się w cieniu brata, który zawsze był tym głośniejszym. Ale Bartek nie jest bezbarwny: jest bystry, kiedy trzeba, potrafi być konkretny jak mało kto. Bywa dziecinny. Na imprezie firmowej strzelił do kontrahenta piankowym pistoletem. Ale rano jest punktualnie na miejscu z właściwymi częściami w torbie.</p>
+    <p>Biega po okolicy przed szóstą, zanim dzieci się obudzą. Wieczorem, kiedy wreszcie trójka zaśnie, odpala StarCrafta. Ranked 1v1 Terran o 23:30 to jego forma medytacji.</p>
+    <p>Wie, że za chwilę będzie stał w piwnicy szpitala przy maszynie za pięć milionów złotych. Lubi takie zadania. Są konkretne. Coś nie działa, trzeba znaleźć przyczynę.</p>
+  </div>
+
+  <p>Ta historia nie zaczyna się od technologii. Zaczyna się od dwóch ludzi, którzy od lat wykonują swoją pracę rękami, doświadczeniem i cierpliwością. Obaj żyją na Dolnym Śląsku. Obaj są po czterdziestce. Obaj przeczytali, że roboty zabiorą im pracę.</p>
+  <p>To analiza tego, czy mają powody do paniki, weryfikacja najbardziej zuchwałej obietnicy Elona Muska i szczera odpowiedź na pytanie, kto z tej dwójki śpi dziś spokojniej. Bez hype'u. Bez czarnowidztwa. Same dowody.</p>
+</section>
+
+<img class="full-img" src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=1600&auto=format&q=80" alt="Nowoczesny gabinet dentystyczny">
+<p class="img-caption">Fotel się nie zmienił od dekad, ale to, co się dzieje wokół niego, zmienia się coraz szybciej.</p>
+
+<!-- ═══════ SCENARIUSZ A: IGOR ═══════ -->
+<section class="section reveal" id="dentysta">
+  <span class="scenario-tag tag-a">Scenariusz A</span>
+  <h2>Igor: Dentysta z Bolesławca 🦷</h2>
+
+  <p><strong>Profil:</strong> własny gabinet w Bolesławcu (~40 tys. mieszkańców). Przychód głównie prywatny: 79–86% wydatków stomatologicznych w Polsce to gotówka pacjentów. Dochód ok. 350 000 zł rocznie (właściciel praktyki zarabia powyżej średniej etatowej). Praktyka na 3–5 foteli, z higienistką i asystentką. Synowie niedługo idą na studia; finansowo Igor wchodzi w najlżejszy okres od dwudziestu lat.</p>
+  <p>Pytanie: czy AI zepsuje mu tę chwilę?</p>
+
+  <p>Krajobraz AI i robotyki w stomatologii wyobraź sobie jako trzy pierścienie. Duży zewnętrzny, gdzie siedzą <em>narzędzia softwarowe</em>: wdrożone, realne, coraz tańsze. Cienki środkowy ze <em>sprzętem robotycznym</em>: istnieje, ledwo. I prawie pusty środek, gdzie teoretycznie powinien być „autonomiczny robot-dentysta".</p>
+
+  <h3>Co naprawdę istnieje i działa</h3>
+  <p>Diagnostyka AI to główny numer programu. <strong>Pearl</strong>, <strong>Overjet</strong> i <strong>VideaHealth</strong> mają certyfikaty FDA do analizy RTG, wykrywania próchnicy, pomiaru ubytków kostnych. Czułość: 85%. Swoistość: 90%. Redukcja przeoczonych zmian przy współpracy AI z dentystą: 43%. Sam VideaHealth przetwarza ponad 500 milionów zdjęć RTG rocznie u ponad 50 tysięcy klinicystów. To narzędzie, które łapie to, czego ludzkie oko nie złapie po ósmej godzinie pracy.</p>
+  <p>Wspomagane przez AI projektowanie koron (3Shape Automate, Exocad, Dentbird) generuje gotowy projekt w ~83 sekundy zamiast 5–6 minut ręcznie. Segmentacja CBCT, która technikowi zajmowała 45 minut, z AI schodzi do minuty. Europejski rynek stomatologii: 12,16 mld USD w 2025, projekcja wzrostowa. Pieniądze płyną do branży, nie z niej.</p>
+
+  <div class="margin-note reveal">
+    <strong>📋 Cicha rewolucja: administracja.</strong> Głosowe notatki kliniczne, AI do planowania wizyt, automatyczna weryfikacja ubezpieczeń. Czas dokumentacji spada o 71%. Dla Igora, który wieczorem woli grać w LoLa niż wklepywać kody ICD, to zmiana zasad gry. 45 minut dziennie z powrotem. Na Annę, na synów, na Summoner's Rift.
+  </div>
+
+  <h3>Pytanie o roboty</h3>
+  <p><strong>Neocis Yomi S</strong> to jedyny robot dentystyczny z certyfikacją FDA. Nowa generacja (koniec 2025) może być obsługiwana przez jednego lekarza za pomocą pedału i ekranu dotykowego. Ponad 100 000 robotycznych osteotomii. Ale uwaga: Yomi jest <em>pasywny</em>. Chirurg trzyma wiertło. Robot prowadzi rękę haptycznie. To precyzyjny GPS, nie autopilot.</p>
+  <p><strong>Perceptive</strong> trafił na nagłówki w lipcu 2024: „pierwszy w pełni automatyczny zabieg stomatologiczny" na pacjencie w Kolumbii. Sześć osób, dokładność poniżej 50μm, zero powikłań. Ale firma pisze w zastrzeżeniu, że <em>nie przeprowadzono żadnych testów w USA pod nadzorem IRB ani IDE</em>. Do certyfikacji FDA: ponad 5 lat. Koszt: znacznie powyżej 200 000 euro.</p>
+  <p>Dla Igora? Czyste science fiction. Anna ma większe szanse spotkać robota na szpitalnym korytarzu niż Igor w swoim gabinecie.</p>
+
+  <div class="pullquote reveal">
+    Jama ustna to najgorsze możliwe środowisko dla robota: mokre, ciasne, pełne nieprzewidywalnej tkanki miękkiej i podłączone do świadomego, zdenerwowanego człowieka, który w każdej chwili może kichnąć.
+    <cite>— Parafraza każdego badacza robotyki dentystycznej</cite>
+  </div>
+
+  <h3>Typowy dzień Igora okiem AI</h3>
+
+  <p><strong>8:10</strong> — Chłopiec siada na fotelu i patrzy podejrzliwie na urządzenia wokół siebie. Matka stoi w drzwiach ze splecionymi rękami.</p>
+  <p>Igor nie zaczyna od narzędzi.</p>
+  <p>— Lubisz dinozaury? — pyta.</p>
+  <p>Chłopiec kiwa głową.</p>
+  <p>— Widzisz ten aparat? Robi zdjęcia zębów. Kiedyś miałem pacjenta, który twierdził, że ma ząb wielkości T-Rexa.</p>
+  <p>Chłopiec zaczyna się śmiać. Napięcie znika. Zdjęcie RTG jest zrobione, zanim dziecko w ogóle zauważy, że badanie się zaczęło. Maszyna może coś zasugerować. Ale nie potrafi jeszcze tego zrobić.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 0%</span><span class="auto-bar"><span class="auto-bar-fill fill-human" style="width:100%"></span></span></span></p>
+
+  <p><strong>8:25</strong> — Pantomogram na monitorze. Igor pochyla się do ekranu. Z Pearl AI podświetliłoby podejrzane punkty, zmierzyło głębokość ubytku, złapało te 43% zmian, które statystycznie omija ludzkie oko po pięciu godzinach. Dodatkowa para oczu, która nigdy nie mruga.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 40%</span><span class="auto-bar"><span class="auto-bar-fill fill-ai" style="width:40%"></span></span></span></p>
+
+  <p><strong>9:00</strong> — Wypełnienie. Światło lampy. Dłonie lekarza. Precyzja. Pacjentka opowiada o wakacjach, Igor kiwa głową i jednocześnie warstwiuje kompozyt z dokładnością, którą budował piętnaście lat. Potem lampa polimeryzacyjna, kilka sekund ciszy, delikatne polerowanie. Robot tego nie zrobi.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 0%</span><span class="auto-bar"><span class="auto-bar-fill fill-human" style="width:100%"></span></span></span></p>
+
+  <p><strong>10:30</strong> — Kanałowe. Godzina pod mikroskopem. W gabinecie zapada cisza. Igor pracuje pilnikami endodontycznymi w kanałach cieńszych od milimetra. To jest ten moment w stomatologii, gdzie liczy się tylko jedno: doświadczenie rąk, które wiedzą, kiedy przestać naciskać. Asystentka podaje narzędzia bez słowa. Oboje znają tę choreografię. Żaden robot tego nie potrafi. Żaden nie będzie potrafił przez dekadę.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 0%</span><span class="auto-bar"><span class="auto-bar-fill fill-human" style="width:100%"></span></span></span></p>
+
+  <p><strong>12:00</strong> — Konsultacja implantologiczna. Ze skanerem i AI plan byłby gotowy w minuty zamiast dwudziestu. Pacjent i tak musi zaufać człowiekowi. Bo nikt nie pozwoli komuś, kogo nie zna, wiercić w swojej szczęce.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 30%</span><span class="auto-bar"><span class="auto-bar-fill fill-ai" style="width:30%"></span></span></span></p>
+
+  <p><strong>13:00</strong> — Przerwa. Igor siada przy biurku i sprawdza telefon. Na grupie znajomych ktoś wrzucił link: „AI zastąpi lekarzy do 2030". Igor wysyła emoji płaczącego ze śmiechu. Anna pisze: „Kup mleko." Igor odkłada telefon i przez chwilę siedzi w ciszy. Gabinet pusty. Tylko szum klimatyzacji. Taki moment zawieszenia, jak rano w samochodzie.</p>
+
+  <p><strong>14:00–17:00</strong> — Scaling, wypełnienia, plan protetyczny, ortodoncja. Ciąg dalszy tego samego rytmu: rozmowa, diagnostyka, ręce, decyzja. AI pomogłoby z planowaniem; reszta to ręce, oczy i 15 lat doświadczenia.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 15%</span><span class="auto-bar"><span class="auto-bar-fill fill-ai" style="width:15%"></span></span></span></p>
+
+  <p><strong>17:30</strong> — Dokumentacja. Igor mówi do mikrofonu kilka zdań, a system zamienia je w uporządkowany raport medyczny. Kiedyś musiałby to wszystko wpisać ręcznie. Niewielka rzecz. Ale takich drobnych rzeczy w ciągu dnia zbiera się dużo. Zaoszczędzone 45 minut.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 80%</span><span class="auto-bar"><span class="auto-bar-fill fill-ai" style="width:80%"></span></span></span></p>
+
+  <div class="margin-note reveal">
+    <strong>🧮 Bilans dnia Igora:</strong> Z 9 godzin AI realnie usprawnia ok. 2–2,5h (diagnostyka + planowanie + dokumentacja). Pozostałe 6,5–7h to czysto ludzka robota. Proporcja <strong>25/75</strong> na korzyść człowieka, i to w optymistycznym scenariuszu adopcji.
+  </div>
+
+  <h3>Oś czasu</h3>
+  <div class="timeline reveal">
+    <div class="tl-item"><div class="tl-date">2026 — 2028</div><div class="tl-text"><strong>AI jako asystent.</strong> Diagnostyczne nakładki na RTG stają się normą. Notatki AI oszczędzają pół godziny dziennie. Praca przy fotelu w 100% ludzka. Gabinety z AI zyskują przewagę: szybsze diagnozy, lepsza dokumentacja.</div></div>
+    <div class="tl-item"><div class="tl-date">2029 — 2031</div><div class="tl-text"><strong>AI diagnostyka to konieczność.</strong> Brak AI to jak brak cyfrowego RTG dekadę temu. Yomi S i następcy docierają do wybranych polskich ośrodków (100–200 tys. euro; inwestycja dla sieci, nie solówek). Ubezpieczyciele zachodni zaczynają wymagać AI diagnostyki.</div></div>
+    <div class="tl-item"><div class="tl-date">2032 — 2035</div><div class="tl-text"><strong>Ścisk, nie gilotyna.</strong> Dentysta bez AI jak radca prawny bez Lexa. Pierwsze roboty do prostych zabiegów pojawiają się w labach uniwersyteckich. Do gabinetów jeszcze daleko. Igor ma 49 lat i spokojnie myśli o przyszłości.</div></div>
+    <div class="tl-item"><div class="tl-date">2035+</div><div class="tl-text"><strong>Nowa normalność.</strong> Dentysta to klinicysta-nadzorca z AI kopilotem. Popyt rośnie szybciej niż podaż. Turystyka dentystyczna w Polsce eksploduje.</div></div>
+  </div>
+</section>
+
+<!-- ═══════ BOLESŁAWIEC ═══════ -->
+<div class="earthy-band">
+  <div class="offset-img-wrap reveal">
+    <img class="offset-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/2023_Ceramika_boles%C5%82awiecka_%283%29.jpg/1280px-2023_Ceramika_boles%C5%82awiecka_%283%29.jpg" alt="Ceramika bolesławiecka">
+    <div class="offset-text">
+      <h3>Dygresja bolesławiecka 🏺</h3>
+      <p>Miasto Igora słynie z ręcznie malowanej ceramiki, która przetrwała industrializację, bo klienci cenią <em>ludzki dotyk</em>: rękę rzemieślnika, ciepło czegoś zrobionego przez żywego człowieka.</p>
+      <p>Stomatologia podąży tą samą logiką. Pacjenci będą wybierać ludzkich lekarzy nawet wtedy, gdy maszyny potrafiłyby część zabiegów. Ktoś, kto żartuje o dinozaurach z twoim dzieckiem, tego nie wgrasz aktualizacją.</p>
+      <p style="font-size:.8rem;color:var(--caption)">Fot.: Wikimedia Commons, CC BY-SA 4.0</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ POLSKA: IGOR ═══════ -->
+<section class="section reveal">
+  <h3>Dlaczego Bolesławiec jest buforowany</h3>
+  <p><strong>NFZ nie pomoże, ale to nie ma znaczenia.</strong> Igor żyje z gotówki pacjentów. Paradoksalnie to <em>ułatwia</em> adopcję technologii: nie trzeba czekać na żadnego urzędnika.</p>
+  <p><strong>Ekonomia pracy go chroni.</strong> Polski dentysta kosztuje ~100 zł/h. Amerykański: ~500 zł/h. Robot musi być proporcjonalnie tańszy, żeby się zwrócił w Bolesławcu. Taki nie istnieje.</p>
+
+  <div class="margin-note reveal">
+    <strong>🇪🇺 Twierdza regulacyjna:</strong> EU MDR + AI Act (od VIII 2026): medyczne AI to „wysokie ryzyko". Każdy robot dentystyczny potrzebuje CE, oceny zgodności, gwarancji nadzoru ludzkiego. Ten stos regulacji kupuje dekadę.
+  </div>
+
+  <h3>Turystyka dentystyczna: wiatr w żagle</h3>
+  <p><strong>Rynek turystyki dentystycznej w Polsce: 550 mln USD w 2025, projekcja 2,5 mld USD do 2033.</strong> Ponad 150 000 zagranicznych pacjentów rocznie, głównie z UK i Niemiec. Polscy dentyści są o 50–70% tańsi niż niemieccy, przy porównywalnej jakości. Igor siedzi 40 km od Görlitz. Strona po niemiecku i profil na WhatClinic to osobna linia przychodów, na którą AI nie ma żadnego wpływu.</p>
+</section>
+
+<img class="full-img" src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=1600&auto=format&q=80" alt="Dentysta przy pracy">
+<p class="img-caption">Ręce w ustach, odczyt tkanek, decyzje kliniczne w ułamku sekundy. Rdzeń się trzyma.</p>
+
+<!-- ═══════ SCENARIUSZ B: BARTEK ═══════ -->
+<div class="dark-band" id="serwisant">
+<div class="section reveal" style="max-width:780px;margin:0 auto">
+  <span class="scenario-tag tag-b">Scenariusz B</span>
+  <h2>Bartek: Serwisant sprzętu medycznego 🔧</h2>
+
+  <p><strong>Profil:</strong> inżynier serwisu polowego na JDG. Kontraktor B2B: sam płaci ZUS, księgowość i OC. Obrót ok. 240 tys. zł rocznie (na rękę ok. 150 tys. po podatkach i kosztach). Trójka małych dzieci, alimenty, mieszkanie po rozwodzie. Finansowo ciasno, ale rynek mocny i wolność bezcenna.</p>
+
+  <p>W przeciwieństwie do Igora, którego główne zadania zostają nietknięte, Bartek ma AI na co dzień. Różnica? AI czyni go lepszym, nie zbędnym.</p>
+
+  <h3>Co działa tu i teraz</h3>
+  <p><strong>GE OnWatch Predict</strong> monitoruje ponad 1500 szpitali: 40% mniej nieplanowanych przestojów, 35% mniej wezwań. <strong>Philips</strong> przetwarza 1,5 petabajta danych z ponad 200 źródeł: 84% napraw za pierwszym podejściem. <strong>Siemens MindSphere</strong>: predykcyjna konserwacja, 86 autoryzacji FDA. To systemy produkcyjne, nie pilotaże.</p>
+
+  <div class="margin-note reveal">
+    <strong>🥽 AR w serwisie:</strong> ~50% firm korzysta z rozszerzonej rzeczywistości. 37% szybsze naprawy, 28% mniej podróży. Ale w praktyce AR używa 10–20% techników. Bartek ma headset RealWear; częściej dzwoni przez niego do specjalisty w Warszawie niż ogląda hologramy.
+  </div>
+
+  <h3>Typowy dzień Bartka okiem AI</h3>
+
+  <p><strong>7:00</strong> — A4, kierunek Wrocław. Telefon wibruje: alert AI, degradacja cewki gradientowej w MAGNETOM Vida, szpital kliniczny. System podpowiada, jakie części zabrać. Zamiast paniki, Bartek jedzie planowo.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 90%</span><span class="auto-bar"><span class="auto-bar-fill fill-ai" style="width:90%"></span></span> triaż</span></p>
+
+  <p><strong>9:15</strong> — Piwnica szpitalna. Bartek trafia tu schodzić zawsze, bo techniczne pomieszczenia są zawsze w piwnicach. Na korytarzach wyżej ktoś idzie szybko, ktoś stoi przy telefonie, w powietrzu unosi się mieszanka kawy i środków dezynfekcyjnych. Tu, na dole, jest tylko szum chłodzenia i mruczenie elektroniki.</p>
+  <p>Rezonans z zewnątrz wygląda prawie futurystycznie: biały cylinder, gładkie powierzchnie. Ale kiedy Bartek zdejmuje obudowę, wszystko staje się bardziej zwyczajne. Kable. Cewki. Elektronika. Podłącza laptopa i zaczyna czytać logi. Maszyna zapisuje każdą drobną anomalię. Temperaturę. Napięcia. Czas pracy poszczególnych elementów. To jak dziennik życia urządzenia.</p>
+  <p>AI mówi: cewka. Ale Bartek słyszy nienormalne wibracje w systemie chłodzenia. Traktuje raport jako wskazówkę, nie wyrok. Bo w praktyce maszyny często psują się w sposób, którego dokumentacja nie przewiduje.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 60%</span><span class="auto-bar"><span class="auto-bar-fill fill-ai" style="width:60%"></span></span> diagnostyka</span></p>
+
+  <p><strong>9:45</strong> — Naprawa. Ciasna przestrzeń, skorodowany uchwyt montażowy. Dokumentacja mówi jedno, rzeczywistość drugie. Bartek klęka na zimnej posadzce, oświetla latarką, widzi problem. Bierze kawałek blachy aluminiowej i tnie podkładkę. Żadna instrukcja tego nie opisuje. Żaden AR overlay nie pomoże, kiedy problem wymaga pomysłowości i pary rąk, które wiedzą, co robią.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 0%</span><span class="auto-bar"><span class="auto-bar-fill fill-human" style="width:100%"></span></span> czyste ręce</span></p>
+
+  <p>Kilka ruchów kluczem. Reset systemu. Maszyna wraca do życia. W szpitalach oznacza to jedno: ktoś za chwilę będzie mógł zrobić badanie.</p>
+
+  <p><strong>12:00</strong> — Obiad w samochodzie. Kanapka, termos. Cisza. Następny alert: tomograf w Legnicy, degradacja lampy. Bartek zamawia części przez portal. System rezerwuje slot serwisowy. Rutyna.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 80%</span><span class="auto-bar"><span class="auto-bar-fill fill-ai" style="width:80%"></span></span> logistyka</span></p>
+
+  <p><strong>13:30</strong> — Legnica. Wymiana lampy w tomografie. AR headset pomaga przy procedurze kalibracji na modelu, którego Bartek robi pierwszy raz. Ekran w googlach nakłada schemat na rzeczywistość. 45 minut zamiast zwykłych 90.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 40%</span><span class="auto-bar"><span class="auto-bar-fill fill-ai" style="width:40%"></span></span> AR-assisted</span></p>
+
+  <p><strong>15:00</strong> — Telefon. Szpital w Jeleniej Górze, MRI kompletnie padł. Nie jego kontrakt, ale są desperaccy. Bartek podaje stawkę awaryjną. Zgadzają się. JDG w praktyce: klient z ulicy, elastyczność, gotówka.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 0%</span><span class="auto-bar"><span class="auto-bar-fill fill-human" style="width:100%"></span></span> biznes</span></p>
+
+  <p><strong>17:30</strong> — Jelenia Góra. Quench: wyciek helu z kriogenicznej sprężarki.</p>
+  <p>To jest The Big One.</p>
+  <p>Bartek wchodzi w sprzęcie ochronnym do pomieszczenia pełnego hałasu i zimna. Lampy jarzeniowe dają ostre, blade światło. Z rury cieknie coś, czego cieknąć nie powinno. W powietrzu czuć metaliczny posmak. Procedury bezpieczeństwa mówią: sprawdź poziom tlenu. Bartek sprawdza. Potem zdejmuje panel, zagląda do środka i zaczyna pracować.</p>
+  <p>Trzy godziny. Sam. Narzędzia, doświadczenie i cisza, która ma niewiele wspólnego z ciszą porannej autostrady.</p>
+  <p>Żadne AI. Żaden AR. Żadne zdalne wsparcie. Bartek i 15 lat doświadczenia.
+    <span class="auto-bar-wrap"><span class="auto-label">AI 0%</span><span class="auto-bar"><span class="auto-bar-fill fill-human" style="width:100%"></span></span> solo</span></p>
+
+  <p><strong>20:30</strong> — Jedzie po dzieci. Droga jest już bardziej zatłoczona. Najmłodsze zasypia w foteliku, zanim Bartek zdąży wjechać na osiedlową drogę. Dom. Kolacja. Prysznic. Zwykły hałas życia rodzinnego. Za godzinę trójka zaśnie i będzie cisza. Taka sama jak w samochodzie rano. Taka sama jak przed ekranem StarCrafta.
+  </p>
+
+  <div class="margin-note reveal">
+    <strong>🧮 Bilans dnia Bartka:</strong> AI pomogło z triażem, diagnostyką i logistyką (~30% dnia). Pozostałe 70% to fizyczna praca w chaotycznym otoczeniu, improwizacja i decyzje pod presją. Proporcja <strong>30/70</strong> na korzyść człowieka. Bartek widzi AI codziennie, ale AI potrzebuje Bartka bardziej niż Bartek potrzebuje AI.
+  </div>
+
+  <h3>Roboty naprawiające? Serio?</h3>
+  <p>Nie istnieją. Nie są w fazie rozwoju. Nie figurują na żadnej mapie produktowej. Robot, który wymieni kriogeniczną sprężarkę helu w ciasnej piwnicy, omijając wózki i improwizując przy skorodowanym uchwycie? Bartek robi to raz w miesiącu, w ciszy. Robot nie zrobi tego przez dekady.</p>
+
+  <div class="pullquote reveal">
+    Rezonans magnetyczny możesz zdiagnozować zdalnie. Zdalnie nie wymienisz kriogenicznej sprężarki helu. Fizyczny świat nadal wymaga fizycznych rąk.
+    <cite>— Starszy inżynier serwisu, GE Healthcare Polska</cite>
+  </div>
+
+  <h3>Oś czasu</h3>
+  <div class="timeline reveal">
+    <div class="tl-item"><div class="tl-date">2026 — 2028</div><div class="tl-text"><strong>Chatboty w portalach serwisowych.</strong> „Co powoduje błąd E407 na MAGNETOM Vida?" — odpowiedź z diagramami. Naprawy first-time-fix z ~75% do 85%+. Mniej wyjazdów na łatwe sprawy; trudne nadal wymagają obecności.</div></div>
+    <div class="tl-item"><div class="tl-date">2029 — 2031</div><div class="tl-text"><strong>Przesunięcie kompetencji.</strong> 30–40% wezwań rozwiązywanych zdalnie. Łatwe sprawy znikają; trudne zostają. Juniorzy rosną o połowę szybciej dzięki AI. Bartek: 75% czasu na proaktywnej optymalizacji. Wyższa stawka, bo trudniejsze zlecenia.</div></div>
+    <div class="tl-item"><div class="tl-date">2032 — 2035</div><div class="tl-text"><strong>Konsolidacja.</strong> Specjaliści (kriogenika, robotyka, systemy cyber-fizyczne) dyktują warunki. Generaliści pod presją od tańszych techników z AR. Nowy sprzęt modułowy; stary starzejący się i coraz trudniejszy.</div></div>
+    <div class="tl-item"><div class="tl-date">2035+</div><div class="tl-text"><strong>Nowy serwisant.</strong> Hybryda: inżynier + analityk + konsultant. Rynek utrzymania sprzętu medycznego: z 60 mld USD (2025) do 100+ mld USD (2031). Rola inna niż dziś, ale istnieje i dobrze płaci.</div></div>
+  </div>
+
+  <h3>JDG: wolność i ryzyko</h3>
+  <p><strong>Bartek jest kontraktorem. To zmienia kalkulację.</strong> Na JDG zarabia netto więcej niż na etacie, ale nie ma poduszki. Jeśli rynek się skurczy, Bartek zostaje z trzema fakturami mniej i trzema dziećmi więcej.</p>
+  <p><strong>Baza instalacyjna rośnie.</strong> Krajowy Plan Odbudowy oferuje nawet 100% dofinansowania na cyfryzację zdrowia. Więcej maszyn = więcej zleceń.</p>
+  <p><strong>Demograficzna bomba zegarowa.</strong> Połowa polskich serwisantów ma ponad 50 lat. Za 10 lat odejdą. AI nie wymieni sprężarki. Młodzi nie garną się do pracy w terenie. Bartek jest cenniejszy niż myśli.</p>
+
+  <div class="margin-note reveal">
+    <strong>💰 JDG: kalkulacja.</strong> Obrót ~240 tys. Podatek + ZUS: ~55 tys. Koszty (auto, narzędzia, paliwo): ~30 tys. Netto: ~150 tys. = ~12 500 zł/mies. Powyżej średniej w branży. Ale bez żadnej siatki.
+  </div>
+</div>
+</div>
+
+<!-- ═══════ GAMING INTERLUDE ═══════ -->
+<img class="full-img" src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1600&auto=format&q=80" alt="Stanowisko do gier komputerowych">
+<p class="img-caption">23:47. Trzy szpitale, trzy maszyny. Trójka śpi. Czas na ranked.</p>
+
+<section class="section reveal">
+  <div class="scene">
+    <p><strong>Poniedziałek, 23:47.</strong></p>
+    <p>Bartek odpala StarCrafta. W mieszkaniu bez zasłon monitor jest jedynym światłem. Klawisz, klawisz, klik. Zwiad na 2:00. Koszary na 3:15. Pierwszy push na 5:30. Gra skupiony, metodyczny. Dokładnie jak przy rezonansie: skan, diagnoza, egzekucja. Żadnych emocji, czysta strategia.</p>
+    <p>Po drugiej stronie Dolnego Śląska Igor gra „jeszcze jednego LoLa".</p>
+    <p>Anna siedzi obok na kanapie z tabletem. <em>Dziedzictwo</em>, sezon trzeci.</p>
+    <p>— Masz piętnaście minut.</p>
+    <p>Igor krzyczy na jungla. Anna podnosi wzrok znad tabletu i patrzy na niego z wyrazem twarzy, który mówi „masz czterdzieści trzy lata". Igor nie zauważa. Synowie dawno śpią. Albo udają.</p>
+    <p>Dwóch facetów po czterdziestce. Dwa monitory. To samo pytanie gdzieś z tyłu głowy, za statystykami meczów i listą buildów: <em>czy za pięć lat jeszcze będę to robił?</em></p>
+    <p>I drugie pytanie, cichsze: <em>czy za pięć lat jeszcze będę tak pracował?</em></p>
+  </div>
+</section>
+
+<!-- ═══════ MUSK ═══════ -->
+<section class="section reveal" id="musk">
+  <span class="scenario-tag tag-musk">Weryfikacja</span>
+  <h2>Faktor Muska: Robot, który nie potrafi ustać 🤖</h2>
+
+  <p>Kwiecień 2025: Musk pisze, że „roboty prześcigną chirurgów w ciągu kilku lat." Styczeń 2026, podcast <em>Moonshots</em>: Optimus przewyższy chirurgów „w ciągu trzech lat", studia medyczne „bez sensu". Odważna teza od człowieka, którego firma produkuje samochody i rakiety, a nie sprzęt medyczny.</p>
+
+  <p>Trzy tygodnie później, wyniki Tesli za Q4 2025: Musk przyznaje, że <strong>ani jeden Optimus nie wykonuje użytecznej pracy w fabrykach Tesli</strong>. Zero. Pod koniec 2025 robot przewrócił się na demonstracji na żywo.</p>
+
+  <p><strong>Robot, który miał zastąpić chirurgów, nie potrafi ustać na własnych nogach. Dosłownie.</strong></p>
+
+  <div class="pullquote reveal">
+    Musk sprzedaje przyszłość. Inżynierowie budują teraźniejszość. Odległość między jednym a drugim mierzy się w dekadach.
+    <cite>— Rodney Brooks, robotyk z MIT, współtwórca iRobot</cite>
+  </div>
+
+  <div class="table-scroll reveal">
+  <table class="data-table">
+    <thead><tr><th>Zdolność</th><th>Igor?</th><th>Bartek?</th><th>Optimus III.2026</th></tr></thead>
+    <tbody>
+      <tr><td>Precyzja &lt;1mm</td><td><span class="highlight">Krytyczna</span></td><td><span class="highlight">Krytyczna</span></td><td>Nie wykazano</td></tr>
+      <tr><td>Wyczucie siły</td><td><span class="highlight">Krytyczne</span></td><td><span class="highlight">Krytyczne</span></td><td>Szczątkowe</td></tr>
+      <tr><td>Nawigacja w chaosie</td><td>Umiarkowana</td><td><span class="highlight">Krytyczna</span></td><td>Ograniczona (przewraca się)</td></tr>
+      <tr><td>Decyzje kliniczne real-time</td><td><span class="highlight">Krytyczne</span></td><td>Umiarkowane</td><td>Brak</td></tr>
+      <tr><td>Komunikacja z człowiekiem</td><td><span class="highlight">Krytyczna</span></td><td>Ważna</td><td>Brak</td></tr>
+      <tr><td>Certyfikacja medyczna</td><td><span class="highlight">Obowiązkowa</span></td><td><span class="highlight">Obowiązkowa</span></td><td>Nie rozpoczęta</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <p>Przegląd 49 robotów chirurgicznych z certyfikacją FDA (2015–2023): <strong>86% Poziom 1</strong> (asystent), 8% Poziom 2, 6% Poziom 3, <strong>zero Poziom 4–5</strong>. Najlepsza autonomiczna demo: robot STAR operujący na tuszy świni. Poziom 3. Martwa świnia. Sterylny lab. Dziesięć osób nadzoru.</p>
+
+  <p>Konsensus na autonomiczne roboty chirurgiczne: <strong>2045–2060</strong>. Musk jest przesadzony o 15–30 lat. I piękna ironia dla Bartka: gdyby roboty chirurgiczne naprawdę weszły do szpitali, ktoś musiałby je serwisować. Więcej robotów = więcej pracy dla serwisantów. Bartek by się uśmiechnął. Ale pewnie nic by nie powiedział.</p>
+</section>
+
+<!-- ═══════ POLSKA 2030+ ═══════ -->
+<div class="dark-band" id="przyszlosc">
+<div class="section reveal" style="max-width:780px;margin:0 auto">
+  <span class="scenario-tag tag-future">Prognoza</span>
+  <h2>Polska 2030: Jak będzie wyglądał ich świat?</h2>
+
+  <p class="lead">Pewne trendy są na tyle silne, że można je ekstrapolować z przyzwoitą pewnością.</p>
+
+  <h3>Makro</h3>
+  <p>Polska wydaje na zdrowie 2 266 EUR per capita (2023), poniżej średniej UE. <strong>KPO pompuje miliardy w cyfryzację szpitali</strong>: nowy sprzęt, nowe systemy, nowe potrzeby serwisowe. Prywatna stomatologia rośnie niezależnie od rządu. Turystyka dentystyczna: z 550 mln do 2,5 mld USD. Rynek utrzymania sprzętu w Europie: 19 mld USD w 2026, globalnie 100+ mld do 2031 (CAGR 10%+).</p>
+
+  <h3>Igor w 2031</h3>
+  <p><strong>AI jako współpracownik.</strong> Plan leczenia, diagnostyka RTG, dokumentacja — przygotowane przez AI, zatwierdzane przez Igora. Operuje i rozmawia z pacjentem. Szybciej, celniej, z mniejszym zmęczeniem.</p>
+  <p><strong>Gabinet bardziej tech.</strong> Skaner, frezarka chairside, może drukarka 3D. 200–400 tys. zł rozłożone na lata. Synowie skończyli studia; Igor ma na to pieniądze.</p>
+  <p><strong>Konkurencja nowego typu.</strong> Nie roboty kontra ludzie, ale dentyści z AI kontra dentyści bez AI. Igor, jeśli wdroży technologię, jest po stronie wygrywającej.</p>
+
+  <h3>Bartek w 2031</h3>
+  <p><strong>Mniej wyjazdów, ale trudniejsze.</strong> 30–40% prostych wezwań rozwiązywanych zdalnie. Bartek jeździ rzadziej, ale na poważniejsze sprawy. Stawka rośnie: zleceniodawcy płacą za ekspertyzę, nie za obecność. Mniej faktur, wyższe kwoty.</p>
+  <p><strong>Nowe umiejętności.</strong> Platformy predykcyjne, analiza danych, AR. Nie programista, ale pilot: ten sam pojazd, inna warstwa abstrakcji.</p>
+  <p><strong>JDG: rozwidlenie.</strong> Specjalista (kriogenika, robotyka): +20–30% stawka. Generalista: stagnacja lub presja cenowa. Bartek wybiera.</p>
+  <p><strong>Dzieci w 2031:</strong> wszystkie w wieku szkolnym. Mniej żłobkowej logistyki, więcej czasu na rozwój. Bartek w końcu może pojechać na szkolenie bez organizowania akcji ratunkowej.</p>
+</div>
+</div>
+
+<!-- ═══════ FLASH-FORWARD ═══════ -->
+<section class="section reveal">
+  <div class="scene" style="border-left-color:var(--gold);background:linear-gradient(135deg,#fdf8ef,#f5f0e8)">
+    <p><strong>Poniedziałek, 7:48. Rok 2031.</strong></p>
+    <p>Igor stoi w gabinecie obok syna, który przyszedł zobaczyć, jak wygląda praca dentysty od kuchni.</p>
+    <p>Na ekranie komputera program diagnostyczny zaznacza na zdjęciu RTG miejsca wymagające leczenia. Kolorowe punkty, precyzyjne adnotacje, lista zalecanych materiałów. Igor nie pamięta, jak to było bez tego. Jak się pisało notatki ręcznie? Na stronie gabinetu widnieje „Willkommen" i „Welcome". 30% pacjentów w tym tygodniu jest z Niemiec.</p>
+    <p>Syn patrzy na ekran z zainteresowaniem. Igor patrzy na syna i myśli o tym, jak szybko wszystko się zmieniło.</p>
+    <p>Bartek w tym samym czasie patrzy na panel serwisowy z listą urządzeń w kilku szpitalach. Większość działa bez problemu. Kilka zgłasza potrzebę przeglądu. Jeden alert czerwony: quench w Jeleniej Górze. Znowu.</p>
+    <p>Uśmiecha się pod nosem. Wysyła tam juniora z instrukcjami przez AR. Sam jedzie na żółty alert: profilaktyczna wymiana w szpitalu onkologicznym. Spokojna robota. Sam by się nie poznał sprzed pięciu lat, kiedy każdy wyjazd był pożarem.</p>
+    <p>Dzieci podrosły. Najstarsze samo robi sobie śniadanie.</p>
+    <p>Wieczorem Bartek gra w StarCrafta 3. Igor gra w LoLa, ale mniej, bo Anna kazała mu się zapisać na siłownię. Obaj mają po czterdzieści kilka lat. Żaden nie stracił pracy. Obaj ją zmienili.</p>
+  </div>
+</section>
+
+<!-- ═══════ DEVIL'S ADVOCATE ═══════ -->
+<div class="dark-band">
+<div class="section reveal" style="max-width:780px;margin:0 auto">
+  <span class="scenario-tag tag-dark">Uczciwa gra</span>
+  <h2>A co jeśli się mylimy?</h2>
+
+  <p class="lead">Każda uczciwa prognoza mówi, co mogłoby ją obalić.</p>
+
+  <h3>Koszmar Igora: Tani robot + deregulacja</h3>
+  <p>Przełom w robotyce miękkich tkanek + chińscy producenci obniżający cenę 10x + deregulacja UE. Robot za 50 000 euro robi rutynowe wypełnienia. Nie musi zastąpić dentysty w 100%: wystarczy 40% rutyny, żeby gabinet się nie spinał.</p>
+  <p><strong>Prawdopodobieństwo do 2035: 5–10%.</strong> Wymaga jednoczesnego przełomu technologicznego, cenowego i regulacyjnego. Czarny łabędź.</p>
+
+  <h3>Koszmar Bartka: Śmierć przez tysiąc usprawnień</h3>
+  <p>Sprzęt projektowany pod samoserwisowanie: plug-and-play moduły, zdalna kalibracja. Pielęgniarz wymienia komponent pod nadzorem AR. Bartek zbędny nie przez humanoida, lecz przez sumę małych zmian.</p>
+  <p><strong>Prawdopodobieństwo do 2035: 10–15%.</strong> Bardziej realne (ewolucja, nie rewolucja). Ale stara baza instalacyjna wymaga tradycyjnego serwisu latami. Powolna erozja, nie upadek. Bartek ma czas.</p>
+
+  <h3>Koszmar wspólny: Recesja</h3>
+  <p>Głęboka recesja, cięcia w zdrowiu, KPO wstrzymane. Igor traci 30% pacjentów. Szpitale odkładają serwis. Nie ma nic wspólnego z AI, ale uderza mocniej niż jakikolwiek robot.</p>
+  <p><strong>Prawdopodobieństwo: 15–20%</strong> (recesja jest cykliczna). Ale polscy pacjenci traktowali zęby jako priorytet nawet w COVID. A sprzęt się psuje niezależnie od PKB.</p>
+
+  <div class="margin-note reveal">
+    <strong>🛡️ Mitygacja:</strong> Dywersyfikacja. Igor: pacjenci zagraniczni. Bartek: klienci w kilku sektorach (szpitale, kliniki, centra diagnostyczne, weterynarze). Im szersza baza, tym mniejsze ryzyko.
+  </div>
+</div>
+</div>
+
+<!-- ═══════ WERDYKT ═══════ -->
+<section class="section reveal" id="werdykt">
+  <h2>Werdykt: Przepraszamy za brak dramatu</h2>
+
+  <p>Jeśli przeczytałeś do tego miejsca licząc na scenę, w której Igor traci gabinet, a Bartek stoi pod szpitalem z kartką „SZUKAM ZLECEŃ", przepraszamy. Rzeczywistość jest nudniejsza niż nagłówki. Ale nudna w dobry sposób.</p>
+  <p>Obaj siedzą w najtrudniejszym do zautomatyzowania rogu rynku pracy: fizycznie zakotwiczone zawody wymagające manualnej precyzji, improwizacji i ludzkiego zaufania. AI nie zabiera im pracy. AI zmienia ich pracę. Na ich korzyść, jeśli się przygotują.</p>
+
+  <div class="table-scroll reveal">
+  <table class="data-table">
+    <thead><tr><th>Wymiar</th><th>Igor 🦷</th><th>Bartek 🔧</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Bariera manualna</strong></td><td>🟢 Bardzo wysoka</td><td>🟢 Wysoka</td></tr>
+      <tr><td><strong>Zagrożenie AI</strong></td><td>🟡 Umiarkowane (diagnostyka)</td><td>🟡 Umiarkowane (predykcja)</td></tr>
+      <tr><td><strong>Ochrona regulacyjna</strong></td><td>🟢 Bardzo silna</td><td>🟡 Umiarkowana</td></tr>
+      <tr><td><strong>Ludzkie zaufanie</strong></td><td>🟢 Bardzo wysokie</td><td>🟡 Umiarkowane</td></tr>
+      <tr><td><strong>Popyt PL 2026–35</strong></td><td>🟢 Rosnący + turystyka</td><td>🟢 Rosnący (KPO + demografia)</td></tr>
+      <tr><td><strong>Ryzyko humanoidów</strong></td><td>🟢 Bardzo niskie</td><td>🟡 Niskie</td></tr>
+      <tr><td><strong>Stabilność fin.</strong></td><td>🟢 Silna (synowie na studiach)</td><td>🟡 Umiarkowana (JDG + alimenty)</td></tr>
+      <tr><td><strong>AI w codziennej pracy</strong></td><td>25% dnia</td><td>30% dnia</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="verdict-grid reveal">
+    <div class="verdict-card">
+      <div class="verdict-emoji">🦷</div>
+      <h4>Igor, dentysta</h4>
+      <p>AI zmieni sposób pracy, nie ukradnie fotela. Będziesz diagnozował szybciej, operował z kopilotem, spędzał więcej czasu na trudnych przypadkach. Największe zagrożenie to nie roboty. To <em>inni dentyści, którzy wdrożą AI, a ty nie</em>. I ci Niemcy z Görlitz, którzy mogliby do ciebie przyjeżdżać, gdybyś miał stronę po niemiecku.</p>
+      <div class="verdict-score">Werdykt: 🧊 <strong>CHILL</strong><br>Bezpieczeństwo kariery: ★★★★☆ (4/5)</div>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-emoji">🔧</div>
+      <h4>Bartek, serwisant</h4>
+      <p>Twoja praca zmienia się bardziej niż Igorowa. Zdalna diagnostyka i AR przebudowują codzienność. JDG daje wolność, ale nie poduszkę. Trójka i alimenty to presja. Ale baza instalacyjna rośnie, techników brakuje, i ktoś musi wepchnąć 12-tonowy magnes do piwnicy. Ten ktoś to ty. Wyspecjalizuj się i będziesz dyktował warunki.</p>
+      <div class="verdict-score">Werdykt: 🧊 <strong>CHILL</strong> — ale nie zdejmuj nogi z gazu<br>Bezpieczeństwo kariery: ★★★½☆ (3.5/5)</div>
+    </div>
+    <div class="verdict-card">
+      <div class="verdict-emoji">🤖</div>
+      <h4>Twierdzenie Muska</h4>
+      <p>Humanoidy za $20k w medycynie do 2028? Robot nie potrafi ustać. Zastosuj współczynnik korekcji Muska (2–3x), dodaj 5+ lat certyfikacji. PowerPoint był zjawiskowy. Rzeczywistość mniej. Jak mówią w LoLu: <strong>skill diff</strong>.</p>
+      <div class="verdict-score">Prawdopodobieństwo do 2030: <strong>BARDZO NISKIE</strong><br>Ocena realności: ★★☆☆☆ (2/5)</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════ PLAN DZIAŁANIA ═══════ -->
+<div class="dark-band">
+<div class="section reveal" style="max-width:780px;margin:0 auto">
+  <span class="scenario-tag tag-action">Plan działania</span>
+  <h2>Co zrobić w poniedziałek rano</h2>
+  <p class="lead">„Adaptuj się" to truizm. „Kup skaner i naucz się Pythona" to plan.</p>
+
+  <div class="action-box" style="background:rgba(255,255,255,.05);border-color:var(--gold)">
+    <h4>🦷 Igor — plan na 12 miesięcy</h4>
+    <ul>
+      <li><strong>Marzec: Subskrypcja diagnostyki AI.</strong> Pearl, Overjet lub VideaHealth. 800–2000 zł/mies. 43% mniej przeoczonych zmian + 45 min/dzień mniej papierologii. Zrób to w tym tygodniu.</li>
+      <li><strong>Kwiecień–Maj: Automatyzuj administrację.</strong> Dragon Medical One (~300 zł/mies.) lub Medfile z AI. Kody ICD automatycznie. Z 45 minut papierologii na 10.</li>
+      <li><strong>Czerwiec: Skaner wewnątrzustny.</strong> Medit i700 (~65 tys.) lub Primescan 2 (~130 tys.). Leasing 36–48 rat. Następna duża inwestycja, nie robot.</li>
+      <li><strong>Wrzesień: CEDE Poznań.</strong> Największe targi stomatologiczne w Europie Środkowej. AI, CAD/CAM, networking. ~200 zł za wejściówkę.</li>
+      <li><strong>Q4: Kurs implantologii cyfrowej.</strong> Straumann, Nobel Biocare. 3–8 tys. zł. Na Yomi S będziesz gotowy.</li>
+      <li><strong>Cały rok: Görlitz jest 40 km.</strong> Strona po niemiecku. Profil na WhatClinic, Qunomedical. 2–5 tys. zł. Potencjał: +50–100% przychodów w 3 lata.</li>
+      <li><strong>3–5 lat: Grupa praktyk.</strong> 2–3 gabinety, wspólna inwestycja (frezarka ~200 tys.), specjalizacja. Siła grupy przy kosztach solówki.</li>
+    </ul>
+  </div>
+
+  <div class="action-box" style="background:rgba(255,255,255,.05);border-color:var(--accent-b);margin-top:2rem">
+    <h4>🔧 Bartek — plan na 12 miesięcy</h4>
+    <ul>
+      <li><strong>Marzec: Certyfikacja OEM.</strong> Siemens, GE lub Philips. +15–25% stawka. Koszt: 5–15 tys. zł (często pokrywany przez zleceniodawcę).</li>
+      <li><strong>Kwiecień–Czerwiec: Podstawy Pythona.</strong> Google Data Analytics (Coursera, darmowy) lub Python for Everybody. 2–3h/tyg. po uśpieniu trójki. Zamiast jednej partii StarCrafta.</li>
+      <li><strong>Lipiec–Wrzesień: Platformy predykcyjne.</strong> MindSphere, Edison, IntelliSpace. Darmowe dema i dokumentacja. Przewaga na każdej rozmowie o kontrakt.</li>
+      <li><strong>Październik: Wybierz niszę.</strong> Kriogenika? Robotyka medyczna (da Vinci, Mako)? Systemy cyber-fizyczne? Generaliści pod presją; specjaliści dyktują. 10–30 tys. zł w kursach rozłożone na 2–3 lata → +20–30% stawka.</li>
+      <li><strong>Cały rok: Dywersyfikuj klientów.</strong> Kliniki prywatne, centra diagnostyczne, weterynarze z drogim sprzętem. Szersza baza = mniejsze ryzyko.</li>
+      <li><strong>Cały rok: PSME.</strong> Polskie Stowarzyszenie Inżynierów i Techników Medycznych. Networking, szkolenia. Składka symboliczna.</li>
+      <li><strong>3–5 lat: Mikrofirma.</strong> Z JDG do sp. z o.o. z 2–3 technikami. Bartek diagnozuje zdalnie, juniorzy wykonują pod nadzorem. Skalowanie. Trójka będzie większa, będzie więcej czasu.</li>
+    </ul>
+  </div>
+
+  <div class="margin-note reveal">
+    <strong>📊 ROI:</strong> Igor: ~100–200 tys. zł → +30–50% przychodów w 3–5 lat. Bartek: ~30–50 tys. zł → +20–30% stawki w 2–3 lata. Obaj: najlepsza inwestycja to czas na naukę, nie pieniądze na sprzęt.
+  </div>
+</div>
+</div>
+
+<!-- ═══════ ZAMKNIĘCIE ═══════ -->
+<section class="section reveal">
+  <h2>Podsumowanie</h2>
+
+  <p>Fosa Igora jest głębsza: regulacje, intymność relacji z pacjentem, fizyczna trudność chirurgii jamy ustnej. Gabinet na tyle mały, żeby być zwinny, i na tyle blisko Niemiec, żeby karmić się turystyką. Synowie idą na studia, Anna pracuje. AI będzie kopilotem, nie konkurentem.</p>
+
+  <p>Fosa Bartka jest szeroka, ale płytsza. Baza instalacyjna i złożoność sprzętu chronią rolę, ale zestaw zadań zmieni się wyraźnie. JDG daje wolność bez poduszki. Trójka małych dzieci to presja, której Igor już nie zna. Klucz: specjalizacja. Bartek-generalista za 5 lat będzie pod presją. Bartek-specjalista od kriogeniki będzie dyktował warunki.</p>
+
+  <p>A Optimus? To nie ceramika bolesławiecka. Ceramika przetrwała wieki, bo za nią stał rzemieślnik z prawdziwymi rękami. Optimus nie przetrwał nawet demo.</p>
+
+  <p>Najbardziej prawdopodobny scenariusz przyszłości jest mniej dramatyczny niż w wielu nagłówkach. Ani Igor, ani Bartek nie obudzą się któregoś dnia i nie odkryją, że maszyna przejęła ich pracę. Raczej będą obserwować, jak ich zawody powoli się zmieniają. Niektóre zadania znikną. Inne pojawią się na ich miejscu.</p>
+
+  <p>Ale wciąż będzie potrzebny ktoś, kto potrafi patrzeć, myśleć i działać w świecie, który nie zawsze zachowuje się zgodnie z instrukcją.</p>
+
+  <p>Jutro Bartek wstanie przed szóstą, pobiegnie po okolicy zanim dzieci się obudzą, posadzi im śniadanie na stół, wsiądzie w auto i pojedzie naprawić coś, czego żaden robot nie potrafi. Igor otworzy gabinet, włączy kompresor, nastawi kawę i opowie pierwszemu pacjentowi żart, którego żaden algorytm nie wymyśli.</p>
+
+  <p>Wieczorem Bartek zagra w StarCrafta, a Igor w LoLa. Technologia zmieni ich narzędzia. Ale ich praca nadal oprze się na tym samym.</p>
+
+  <p>Na doświadczeniu.</p>
+  <p>Na cierpliwości.</p>
+  <p>I na zdolności radzenia sobie z rzeczywistością, która rzadko działa dokładnie tak, jak przewiduje instrukcja.</p>
+
+  <div class="end-mark">■</div>
+</section>
+
+<img class="full-img" src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?w=1600&auto=format&q=80" alt="Ludzka i robotyczna dłoń">
+<p class="img-caption">Przekazanie pałeczki między człowiekiem a maszyną. Wciąż w toku.</p>
+
+<footer class="footer">
+  <div class="brand">Dwa Bieguny</div>
+  <p>Analiza &middot; Marzec 2026</p>
+  <p style="margin-top:1rem;font-size:.7rem;color:#5c564e">Zdjęcia: Unsplash &middot; Wikimedia Commons &middot; Treść wygenerowana przez AI w celach analitycznych.<br>Nie stanowi porady zawodowej ani finansowej. Ale gdybyśmy radzili: kup ten skaner, Igor. I Bartek — naucz się Pythona. Zamiast jednej partii StarCrafta.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  const pct=(h.scrollTop/(h.scrollHeight-h.clientHeight))*100;
+  document.getElementById('progress').style.width=pct+'%';
+});
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
